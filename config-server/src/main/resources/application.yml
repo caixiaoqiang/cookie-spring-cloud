@@ -1,0 +1,17 @@
+server :
+  port: 4000
+
+spring:
+  application:
+    name: config-server
+  cloud :
+    config :
+      server :
+        git :
+          uri : https://github.com/caixiaoqiang/config-server-yml.git
+          basedir: @project.artifactId@/config-repo #默认存到/tmp目录下，但linux的/tmp目录可能会因为某种原因删除，所以定位配置当当前目录下
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1000/eureka/
