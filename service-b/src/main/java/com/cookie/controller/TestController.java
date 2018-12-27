@@ -23,9 +23,13 @@ public class TestController {
     @Autowired
     ServiceAFeign serviceAFeign ;
 
+    @Value("${info.profile}")
+    private String profile ;
+
     @GetMapping("")
     public String add(@RequestParam("a") int a , @RequestParam("b") int b ){
 
+        System.out.println("============="+profile);
         return serviceAFeign.add(a,b) ;
     }
 }

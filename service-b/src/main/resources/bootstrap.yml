@@ -1,0 +1,40 @@
+server :
+  port: 3000
+
+spring:
+  application:
+    name: service-b
+  cloud:
+    config:
+#      discovery :
+#        enable : true
+#        serviceId : config-server
+      uri: http://localhost:4000/
+      profile : dev
+      label : master
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1000/eureka/
+
+#  feign超时配置 默认为5s
+#ribbon:
+#  ReadTimeout : 5000
+#  ConnectTimeout : 5000
+#
+#
+## 开启熔断处理
+#feign :
+#  hystrix :
+#    enabled : true
+#
+#hystrix:
+#  command :
+#    default :
+#      execution :
+#        timeout :
+#          enabled : true  # feign调用超时由ribbon处理，默认为FALSE
+#        isolation :
+#          thread :
+#            timeoutInMilliseconds : 6000    #进入fallback时间，需>=feign调用超时时间，否则会在fallback时间到期时，进入fallback中
