@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(name = "service-a", fallback = ServiceAFeign.HystrixClientFallback.class)
 public interface ServiceAFeign {
 
-    @GetMapping("/test")
+    @GetMapping("/test/add")
     public String  add(@RequestParam("a") int a , @RequestParam("b") int b );
 
 
 
     @Component
-    public    class  HystrixClientFallback implements  ServiceAFeign{
+    public    static  class  HystrixClientFallback implements  ServiceAFeign{
 
         @Override
         public String add(int a, int b) {

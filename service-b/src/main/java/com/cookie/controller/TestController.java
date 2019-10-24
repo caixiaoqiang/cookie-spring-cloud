@@ -1,6 +1,8 @@
 package com.cookie.controller;
 
 import com.cookie.feign.ServiceAFeign;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("test")
 public class TestController {
 
-
+    private final static Logger logger = LoggerFactory.getLogger(TestController.class);
     @Value("${spring.application.name}")
     private String applicationName ;
 
@@ -29,7 +31,7 @@ public class TestController {
     @GetMapping("")
     public String add(@RequestParam("a") int a , @RequestParam("b") int b ){
 
-        System.out.println("============="+profile);
+        logger.info("============="+profile);
         return serviceAFeign.add(a,b) ;
     }
 }
