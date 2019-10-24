@@ -12,9 +12,10 @@ eureka:
 
 
 zuul:
-  prefix: /api
+  prefix: /api  #路由前缀
+  ignored-patterns : /**/test/muti/** #指定路径不进行路由控制，使用api端口访问对应接口会报404
   routes:
-    sensitiveHeaders : Cookie,Set-Cookie,Authorization
+    sensitiveHeaders : Cookie,Set-Cookie,Authorization  #防止过滤消息头
     config-server:
       path: /config-server/**
       service-id: config-server
@@ -27,8 +28,12 @@ zuul:
 
 #  feign超时配置 默认为5s
 ribbon:
-  ReadTimeout : 10000
-  ConnectTimeout : 10000
+  ReadTimeout : 5000
+  ConnectTimeout : 5000
+
+feign:
+  hystrix :
+    enabled : true  #开启超时熔断处理
 
 hystrix:
   command :
@@ -38,4 +43,4 @@ hystrix:
           enabled : true  # feign调用超时由ribbon处理，默认为FALSE
         isolation :
           thread :
-            timeoutInMilliseconds : 12000    #进入fallback时间，需>=feign调用超时时间，否则会在fallback时间到期时，进入fallback中
+            timeoutInMilliseconds : 6000    #进入fallback时间，需>=feign调用超时时间，否则会在fallback时间到期时，进入fallback中
