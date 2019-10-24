@@ -1,5 +1,5 @@
 server :
-  port: 2000
+  port: 2002
 
 spring:
   application:
@@ -9,3 +9,16 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:1000/eureka/
+  instance:
+    preferIpAddress: true
+    hostname: service-a
+    metadata-map:
+      labelAnd: v2
+
+config :
+  name : cookie
+  tel : 17311351991
+  url: jdbc:mysql://114.55.127.198:82/cookie?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+  username: root
+  password: Newrank123456
+  driver-class-name: com.mysql.cj.jdbc.Driver
