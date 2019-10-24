@@ -1,0 +1,41 @@
+server :
+  port: 8050
+
+spring:
+  application:
+    name: api-gateway
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1000/eureka/
+
+
+zuul:
+  prefix: /api
+  routes:
+    sensitiveHeaders : Cookie,Set-Cookie,Authorization
+    config-server:
+      path: /config-server/**
+      service-id: config-server
+    service-a:
+      path: /a/**
+      service-id: service-a
+    service-b:
+      path: /b/**
+      service-id: service-b
+
+#  feign超时配置 默认为5s
+ribbon:
+  ReadTimeout : 10000
+  ConnectTimeout : 10000
+
+hystrix:
+  command :
+    default :
+      execution :
+        timeout :
+          enabled : true  # feign调用超时由ribbon处理，默认为FALSE
+        isolation :
+          thread :
+            timeoutInMilliseconds : 12000    #进入fallback时间，需>=feign调用超时时间，否则会在fallback时间到期时，进入fallback中
