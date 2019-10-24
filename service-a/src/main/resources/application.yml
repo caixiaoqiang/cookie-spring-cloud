@@ -11,7 +11,7 @@ eureka:
       defaultZone: http://localhost:1000/eureka/
   instance:
     preferIpAddress: true
-    hostname: service-a
+    hostname: service-a #版本控制的时候根据该昵称进行选择
     metadata-map:
       labelAnd: v2
 
