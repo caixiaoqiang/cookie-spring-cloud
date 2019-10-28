@@ -13,7 +13,6 @@ import org.springframework.context.annotation.FilterType;
 
 @EnableFeignClients
 @SpringCloudApplication
-@ComponentScan("com.cookie")
 public class ServiceAApplication {
 
 	public static void main(String[] args) {
