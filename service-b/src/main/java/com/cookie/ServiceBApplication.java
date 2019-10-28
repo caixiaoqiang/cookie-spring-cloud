@@ -8,7 +8,6 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringCloudApplication
 @EnableFeignClients		// 允许feign调用
-@ComponentScan("com.cookie")
 public class ServiceBApplication {
 
 	public static void main(String[] args) {
