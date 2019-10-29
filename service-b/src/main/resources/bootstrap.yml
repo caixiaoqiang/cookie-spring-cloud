@@ -6,12 +6,11 @@ spring:
     name: service-b
   cloud:
     config:
-#      discovery :
-#        enable : true
-#        serviceId : config-server
-      uri: http://localhost:4000/
-      profile : dev
-      label : master
+      discovery :
+        enabled : true    # 开启通过服务来访问Config Server的功能
+        serviceId : config-server  # 指定Config Server注册的服务名
+#      uri: http://localhost:4000/
+      profile : dev   # 定位git上的资源
 
 eureka:
   client:
