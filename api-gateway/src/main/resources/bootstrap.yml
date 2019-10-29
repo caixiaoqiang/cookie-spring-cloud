@@ -4,6 +4,12 @@ server :
 spring:
   application:
     name: api-gateway
+  cloud:
+    config:
+      discovery :
+        enabled : true    # 开启通过服务来访问Config Server的功能
+        serviceId : config-server  # 指定Config Server注册的服务名
+      profile : dev   # 定位git上的资源
 
 eureka:
   client:
@@ -25,22 +31,3 @@ zuul:
     service-b:
       path: /b/**
       service-id: service-b
-
-#  feign超时配置 默认为5s
-ribbon:
-  ReadTimeout : 5000
-  ConnectTimeout : 5000
-
-feign:
-  hystrix :
-    enabled : true  #开启超时熔断处理
-
-hystrix:
-  command :
-    default :
-      execution :
-        timeout :
-          enabled : true  # feign调用超时由ribbon处理，默认为FALSE
-        isolation :
-          thread :
-            timeoutInMilliseconds : 6000    #进入fallback时间，需>=feign调用超时时间，否则会在fallback时间到期时，进入fallback中

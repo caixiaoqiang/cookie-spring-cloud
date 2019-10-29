@@ -8,6 +8,7 @@ import com.netflix.zuul.context.RequestContext;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +24,9 @@ public class GrayFilter extends ZuulFilter {
 
 	private String testUuids = "cookie,andy";
 
+	@Value("${info.profile}")
+	private String profile ;
+
 	private final static Logger logger = LoggerFactory.getLogger(GrayFilter.class);
 	@Override
 	public String filterType() {
@@ -36,6 +40,7 @@ public class GrayFilter extends ZuulFilter {
 
 	@Override
 	public boolean shouldFilter() {
+		System.out.println(profile);
 		RequestContext ctx = RequestContext.getCurrentContext();
 		HttpServletRequest request = ctx.getRequest();
 
